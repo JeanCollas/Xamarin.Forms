@@ -49,8 +49,18 @@ namespace Xamarin.Forms.Platform.UWP
 			// and that content is not collapsed
 			var frameworkElement = Content as FrameworkElement;
 
-			// Temporarily tie the visibility of the toolbar to the visibility of the Title
-			// to be consistent with the old style / other platforms
+			// For now, the command bar is only visible if this control is:
+			// 1. Hosted directly in a top-level navigation page
+
+			// 2. Hosted in a top-level tabbed page which is currently displaying a navigation page
+
+			// 3. Hosted in a Master Detail Page which is displaying a Navigation Page as its Detail
+
+			// 4. Hosted in a Navigation Page which is the direct Detail page of a MDP
+			
+
+			// This next clause tied the visibility of the Command Bar to the visibility of the Title
+			// it'll have to go
 			if (frameworkElement != null && frameworkElement.Visibility == Visibility.Collapsed)
 			{
 				Visibility = Visibility.Collapsed;
