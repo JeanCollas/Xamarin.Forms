@@ -21,21 +21,14 @@ namespace Xamarin.Forms.Internals
 		void INameScope.RegisterName(string name, object scopedElement)
 		{
 			if (_names.ContainsKey(name))
-				throw new ArgumentException("An element with the same key already exists in NameScope", "name");
+				throw new XamlParseException(string.Format("An element with the name \"{0}\" already exists in this NameScope", name), xmlLineInfo);
 
 			_names[name] = scopedElement;
 		}
 
 		void INameScope.RegisterName(string name, object scopedElement, IXmlLineInfo xmlLineInfo)
 		{
-			try
-			{
-				((INameScope)this).RegisterName(name, scopedElement);
-			}
-			catch (ArgumentException)
-			{
-				throw new XamlParseException(string.Format("An element with the name \"{0}\" already exists in this NameScope", name), xmlLineInfo);
-			}
+			((INameScope)this).RegisterName(name, scopedElement);
 		}
 
 		void INameScope.UnregisterName(string name)
